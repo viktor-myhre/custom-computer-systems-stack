@@ -20,6 +20,14 @@ class MemoryFault(EmulatorFault):
     """Raised when instruction fetch or memory access is invalid."""
 
 
+def decode_instruction_fields(instruction: int) -> tuple[int, int, int, int]:
+    opcode = (instruction >> 12) & 0xF
+    a = (instruction >> 8) & 0xF
+    b = (instruction >> 4) & 0xF
+    c = instruction & 0xF
+    return opcode, a, b, c
+
+
 @dataclass
 class CPUState:
     registers: list[int] = field(default_factory=lambda: [0] * REGISTER_COUNT)
@@ -68,6 +76,11 @@ class Emulator:
             self.state.fault = f"memory error: {exc}"
         return self.state
 
+    def read_instruction(self, address: int | None = None) -> int:
+        if address is None:
+            address = self.state.pc
+        return self._fetch_word(address)
+
     def _fetch_word(self, address: int) -> int:
         if address < 0 or address + 1 >= MEMORY_SIZE:
             raise MemoryFault(f"instruction fetch out of bounds at 0x{address:04X}")
@@ -76,10 +89,7 @@ class Emulator:
         return low | (high << 8)
 
     def _execute(self, instruction: int) -> None:
-        opcode = (instruction >> 12) & 0xF
-        a = (instruction >> 8) & 0xF
-        b = (instruction >> 4) & 0xF
-        c = instruction & 0xF
+        opcode, a, b, c = decode_instruction_fields(instruction)
 
         if opcode == 0x0:
             self._require_zero_fields(a, b, c)
