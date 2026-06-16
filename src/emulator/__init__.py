@@ -1,3 +1,3 @@
-from .core import CPUState, DecodeFault, Emulator, MemoryFault
+from .core import CPUState, DecodeFault, Emulator, MemoryFault, decode_instruction_fields
 
-__all__ = ["CPUState", "DecodeFault", "Emulator", "MemoryFault"]
+__all__ = ["CPUState", "DecodeFault", "Emulator", "MemoryFault", "decode_instruction_fields"]
