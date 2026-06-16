@@ -20,14 +20,24 @@ The project prioritizes education, architecture, correctness, clarity, determini
 
 ## Current Status
 
-The project is in its initial planning and scaffolding phase.
+The project has completed the first baseline path from specification to execution.
 
-The first implementation milestone is expected to focus on:
+The current baseline includes:
 
 - Defining a minimal ISA.
 - Documenting instruction encoding and memory behavior.
 - Building a small CPU emulator.
-- Adding executable examples and tests for the first instructions.
+- Building a minimal assembler.
+- Adding executable examples and automated tests.
+- Adding a repo-local CLI for assemble-and-run workflows.
+
+The current implementation supports:
+
+- ISA Draft 0 in `docs/isa.md`
+- a minimal emulator for `HALT`, `NOP`, `MOV`, `ADD`, and `JMP`
+- a minimal assembler for the same instruction set
+- integration tests that assemble and run complete programs
+- a terminal CLI for assemble, run, and trace workflows
 
 ## Design Principles
 
@@ -81,6 +91,34 @@ Documentation is treated as part of the system design.
 Important design choices should be recorded in `docs/decisions/` as short decision records. Specifications such as the ISA, binary format, memory model, and calling convention should be kept close to the code they govern.
 
 All repository documentation should be written in English.
+
+## Quick Start
+
+The current toolchain can be exercised directly from the terminal.
+
+Assemble a program and print machine code as hex:
+
+```text
+python -m tools.cli assemble examples/asm/minimal-halt.asm
+```
+
+Run an assembly program in the emulator:
+
+```text
+python -m tools.cli run examples/asm/minimal-halt.asm
+```
+
+Run with instruction trace output:
+
+```text
+python -m tools.cli run examples/asm/minimal-halt.asm --trace
+```
+
+Run the current automated test suite:
+
+```text
+python -m unittest discover -s tests -t . -v
+```
 
 ## Early Roadmap
 

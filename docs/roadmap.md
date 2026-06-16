@@ -6,6 +6,9 @@ This roadmap describes the intended build order for the project. It is a sequenc
 
 The first phase establishes the minimum architectural contract required to support machine execution:
 
+Current status:
+
+- Baseline complete
 - Define the first ISA draft.
 - Define the CPU state model.
 - Define the memory model.
@@ -23,6 +26,9 @@ Deliverables:
 
 The second phase implements a small emulator that executes the initial ISA draft:
 
+Current status:
+
+- Baseline complete
 - Model registers, program counter, and halted state.
 - Load a program image into memory.
 - Step one instruction at a time.
@@ -40,6 +46,9 @@ Deliverables:
 
 The third phase introduces assembly source and translation to machine code:
 
+Current status:
+
+- Baseline complete
 - Define assembly syntax for the first instructions.
 - Support labels and numeric literals.
 - Encode instructions according to `docs/isa.md`.
@@ -55,6 +64,9 @@ Deliverables:
 
 The fourth phase introduces a very small source language and a direct compilation path:
 
+Current status:
+
+- Not started
 - integer literals
 - variables
 - arithmetic
@@ -71,6 +83,9 @@ Deliverables:
 
 The fifth phase introduces the first system-level abstractions above machine execution:
 
+Current status:
+
+- Not started
 - program startup model
 - trap and syscall mechanism
 - simple program loading
@@ -87,6 +102,9 @@ Deliverables:
 
 The sixth phase expands the system into a usable software environment:
 
+Current status:
+
+- Not started
 - filesystem structures
 - shell commands
 - utility programs
@@ -102,6 +120,9 @@ Deliverables:
 
 Later phases may include:
 
+Current status:
+
+- Not started
 - richer compiler features
 - debugger support
 - object format improvements
